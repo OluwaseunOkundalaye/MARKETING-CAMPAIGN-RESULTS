@@ -126,7 +126,8 @@ path = '/content/drive/MyDrive/My Projects/Marketing Campaign Results/Marketing 
 data = pd.read_csv(path)
 ```
 
-1.	Are there any null values or outliers? How will you handle them?
+**1.	Are there any null values or outliers? How will you handle them?**
+   
 Null values refer to missing or undefined entries in a dataset. They can occur due to incomplete data collection, system errors, or manual omissions. Identifying null values is crucial as they can lead to inaccuracies in analysis or misinterpretation of results.
 
 Outliers are extreme data points that deviate significantly from the majority of observations. They can arise from errors, rare events, or natural variability within the data. These values have the potential to skew statistical measures and distort the overall analysis if not properly addressed.
@@ -331,3 +332,146 @@ The image displays boxplots for various features in the dataset, summarizing the
 Summary:
 
 The dataset shows skewed distributions for income, product spending, and purchase frequency. Several binary features (Kidhome, Teenhome, campaign acceptance) are mostly concentrated at 0, with a few outliers. Outliers in product spending and campaign responses represent a small number of individuals with extreme behaviors. These insights can help in customer segmentation and targeted marketing strategies.
+
+```Python
+z_scores = data[num_cols].apply(zscore)
+outliers = (z_scores > 3) | (z_scores < -3)
+print("Outlier count per column:\n", outliers.sum())
+
+#Explanation: 
+#Computes z-scores for numerical columns to standardize values. Flags values with z-scores greater than 3 (or less than -3) as outliers. Summarizes how many outliers exist in each column.
+```
+
+**Result:**
+
+Outlier count per column:
+Here is the table in GitHub format:
+
+| Column                | Outlier Count |
+|-----------------------|---------------|
+| ID                    | 0             |
+| Year_Birth            | 3             |
+| Income                | 8             |
+| Kidhome               | 0             |
+| Teenhome              | 0             |
+| Recency               | 0             |
+| MntWines              | 16            |
+| MntFruits             | 64            |
+| MntMeatProducts       | 37            |
+| MntFishProducts       | 58            |
+| MntSweetProducts      | 62            |
+| MntGoldProds          | 44            |
+| NumDealsPurchases     | 32            |
+| NumWebPurchases       | 4             |
+| NumCatalogPurchases   | 4             |
+| NumStorePurchases     | 0             |
+| NumWebVisitsMonth     | 9             |
+| AcceptedCmp3          | 163           |
+| AcceptedCmp4          | 167           |
+| AcceptedCmp5          | 163           |
+| AcceptedCmp1          | 144           |
+| AcceptedCmp2          | 30            |
+| Response              | 0             |
+| Complain              | 21            |
+
+
+**2.	What factors are significantly related to the number of web purchases?**
+
+This question seeks to identify the variables in the dataset that have a meaningful impact on the number of purchases made through a website. This involves exploring different customer-related features such as income, age, spending on products, recency, and website visits to determine which ones show a strong correlation with the frequency of web purchases. 
+
+In order to address thus, the following were carried out;
+
+```  Python
+#Import Necessary Libraries
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score, mean_squared_error
+
+#Explanation:
+#train_test_split splits the data into training and testing sets.
+#LinearRegression creates and fits a linear regression model.
+#r2_score and mean_squared_error evaluate the model's performance.
+
+# Select only numeric columns
+numeric_data = data.select_dtypes(include=['number'])
+
+# Compute the correlation matrix
+correlation = numeric_data.corr()
+
+# Sort correlations with 'NumWebPurchases' in descending order
+correlation_with_target = correlation['NumWebPurchases'].sort_values(ascending=False)
+
+# Display the result
+print(correlation_with_target)
+
+#Explanation:
+#data.corr() calculates correlation coefficients for all numerical columns.
+#['NumWebPurchases'] extracts the correlations of NumWebPurchases with other variables.
+#sort_values() sorts the correlation values to easily identify strong positive or negative relationships.
+```
+
+**Result:**
+
+Here is the result in GitHub table format:
+
+| Column               | Correlation with NumWebPurchases |
+|----------------------|----------------------------------|
+| NumWebPurchases      | 1.000000                         |
+| MntWines             | 0.542265                         |
+| NumStorePurchases    | 0.502713                         |
+| MntGoldProds         | 0.421836                         |
+| Income               | 0.380554                         |
+| NumCatalogPurchases  | 0.378376                         |
+| MntSweetProducts     | 0.348544                         |
+| MntFruits            | 0.296735                         |
+| MntMeatProducts      | 0.293761                         |
+| MntFishProducts      | 0.293681                         |
+| NumDealsPurchases    | 0.234185                         |
+| AcceptedCmp4         | 0.155903                         |
+| Teenhome             | 0.155500                         |
+| AcceptedCmp1         | 0.155143                         |
+| Response             | 0.148730                         |
+| AcceptedCmp5         | 0.138684                         |
+| AcceptedCmp3         | 0.042176                         |
+| AcceptedCmp2         | 0.034188                         |
+| Recency              | -0.010726                        |
+| Complain             | -0.016310                        |
+| ID                   | -0.018924                        |
+| NumWebVisitsMonth    | -0.055846                        |
+| Year_Birth           | -0.145040                        |
+| Kidhome              | -0.361647                        |
+
+The correlation analysis reveals several significant relationships between NumWebPurchases and other variables, offering insights into factors that could influence the number of web purchases.
+
+1.	Strong Positive Correlations: The variables most positively correlated with NumWebPurchases include:
+- MntWines (0.54): Customers who spend more on wine are more likely to make web purchases.
+- NumStorePurchases (0.50): A moderate correlation indicates that individuals who make more purchases in stores also tend to purchase more on the web.
+- MntGoldProds (0.42): Higher spending on gold products is associated with increased web purchases.
+- Income (0.38): A positive correlation suggests that wealthier customers are more likely to make web purchases.
+- NumCatalogPurchases (0.38): Customers who purchase more products from catalogs tend to make more web purchases as well.
+
+2.	Moderate to Weak Positive Correlations: Other factors like MntSweetProducts (0.35), MntFruits (0.30), and MntMeatProducts (0.29) show a moderate positive correlation with NumWebPurchases, indicating that customers who spend on these product categories also tend to make more web purchases, although the relationship is weaker than with the top factors.
+
+3.	Weak Negative Correlations: There are a few variables that exhibit weak negative correlations with NumWebPurchases, such as Recency (-0.01), Complain (-0.02), and ID (-0.02), which are not strongly related to web purchases. Additionally, Kidhome (-0.36) shows a negative relationship, implying that customers with children at home may be less likely to make web purchases.
+
+4.	Campaign Acceptance: Variables related to campaign acceptance (e.g., AcceptedCmp1 to AcceptedCmp5) show weak to moderate positive correlations with NumWebPurchases, with AcceptedCmp4 having the strongest positive correlation (0.16). This suggests that customers who respond to marketing campaigns are somewhat more likely to make web
+purchases.
+
+Summary:
+
+The analysis indicates that MntWines, NumStorePurchases, and MntGoldProds are the strongest predictors of NumWebPurchases. These factors, along with Income and NumCatalogPurchases, offer valuable insights for identifying customers who are more likely to make purchases on the web. On the other hand, Kidhome, Recency, and Complain are weaker predictors, with some negative correlations, suggesting they have less influence on web purchase behavior.
+
+**Visualize Relationships**
+
+``` Python
+sns.pairplot(data[['NumWebPurchases', ' Income ', 'Recency', 'NumDealsPurchases', 'NumWebVisitsMonth']])
+plt.show()
+
+#Explanation:
+#Creates scatterplots between NumWebPurchases and selected variables to observe relationships visually.
+#Helps identify potential trends or non-linear patterns.
+```
+
+**Result:**
+
+![](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS/blob/main/Pairplot%20Relationship.png)
