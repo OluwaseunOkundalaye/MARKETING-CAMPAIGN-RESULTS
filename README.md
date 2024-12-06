@@ -100,12 +100,12 @@ There were no duplicates in the Dataset
 
 ## Data Analysis and Insight
 The following analysis were carried out in this project:
-[1.	Are there any null values or outliers? How will you handle them?]()
-[2.	What factors are significantly related to the number of web purchases?]()
-[3.	Which marketing campaign was the most successful?]()
-[4.	What does the average customer look like]()
-[5.	Which products are performing best?]()
-[6.	Which channels are underperforming?]()
+[1.	Are there any null values or outliers? How will you handle them?](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#1are-there-any-null-values-or-outliers-how-will-you-handle-them)
+[2.	What factors are significantly related to the number of web purchases?](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#2what-factors-are-significantly-related-to-the-number-of-web-purchases)
+[3.	Which marketing campaign was the most successful?](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#3which-marketing-campaign-was-the-most-successful)
+[4.	What does the average customer look like](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#4what-does-the-average-customer-look-like)
+[5.	Which products are performing best?](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#5which-products-are-performing-best)
+[6.	Which channels are underperforming?](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#6which-channels-are-underperforming)
 
 The following libraries were imported before the above analysis were carried out:
 
