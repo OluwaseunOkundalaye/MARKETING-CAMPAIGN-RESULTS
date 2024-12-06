@@ -977,24 +977,36 @@ plt.show()
 The line graph titled "Monthly Spending Trends per Product Category" showcases the total spending trends for various product categories from July 2013 to April 2014. The x-axis represents the months, while the y-axis denotes the total spending. Each product category, including MntWines, MntFruits, MntMeatProducts, MntFishProducts, MntSweetProducts, and MntGoldProds, is represented by a distinct colored line. The graph reveals that MntWines consistently has the highest spending, with noticeable peaks and troughs, indicating significant consumer demand. MntMeatProducts also demonstrate considerable variation but at a lower level compared to MntWines. The other categories exhibit relatively lower and more stable spending trends.
 
 ### 6.	Which channels are underperforming?
+
 This question focuses on identifying the sales or distribution channels that are not meeting expected performance metrics such as sales volume, revenue, customer engagement, or profitability. Understanding channel performance is critical for identifying inefficiencies and areas requiring improvement in a company’s marketing, sales, or delivery strategies.
+
 The following were carried out in order to address this analysis;
-Compare Total Purchases Across Channels
+
+**Compare Total Purchases Across Channels**
+
+``` Python
 # Calculate the total number of purchases in each channel
 channel_columns = ['NumWebPurchases', 'NumCatalogPurchases', 'NumStorePurchases']
 total_purchases = data[channel_columns].sum()  # Sum purchases for each channel
 
 print("Total purchases per channel:\n", total_purchases)
-Explanation:
-data[channel_columns].sum(): Sums up the total purchases for each channel (Web, Catalog, and Store) by summing across the relevant columns (NumWebPurchases, NumCatalogPurchases, NumStorePurchases).
-This step helps to identify the overall purchases made through each channel.
-Result:
-Total purchases per channel:
- NumWebPurchases         9150
-NumCatalogPurchases     5963
-NumStorePurchases        12970
 
-Calculate the Conversion Rate for the Web Channel
+#Explanation:
+#data[channel_columns].sum(): Sums up the total purchases for each channel (Web, Catalog, and Store) by summing across the relevant columns (NumWebPurchases, #NumCatalogPurchases, NumStorePurchases).
+#This step helps to identify the overall purchases made through each channel.
+```
+
+**Result:**
+
+| Purchase Channel      | Total Purchases |
+|-----------------------|-----------------|
+| NumWebPurchases       | 9,150           |
+| NumCatalogPurchases   | 5,963           |
+| NumStorePurchases     | 12,970          |
+
+**Calculate the Conversion Rate for the Web Channel**
+
+``` Python
 # Assuming 'NumWebVisits' represents the number of visits to the website
 data['WebConversionRate'] = data['NumWebPurchases'] / data['NumWebVisitsMonth']  # Calculate the conversion rate
 
@@ -1002,12 +1014,19 @@ data['WebConversionRate'] = data['NumWebPurchases'] / data['NumWebVisitsMonth'] 
 average_conversion_rate = data['WebConversionRate'].mean()
 
 print("Average Web Conversion Rate: {:.2f}%".format(average_conversion_rate * 100))
-Explanation:
-data['WebConversionRate']: Calculates the conversion rate for each customer on the web channel by dividing the number of web purchases (NumWebPurchases) by the number of web visits (NumWebVisits).
-data['WebConversionRate'].mean(): Calculates the average conversion rate across all customers. This gives an idea of how effectively the web channel is converting visits into purchases.
-Result:
+
+#Explanation:
+#data['WebConversionRate']: Calculates the conversion rate for each customer on the web channel by dividing the number of web purchases (NumWebPurchases) by the number of web visits (NumWebVisits).
+#data['WebConversionRate'].mean(): Calculates the average conversion rate across all customers. This gives an idea of how effectively the web channel is converting visits into purchases.
+```
+
+**Result:**
+
 Average Web Conversion Rate: inf%
+
 The outcome of Average Web Conversion Rate: inf% suggests that some values in the NumWebVisitsMonth column are likely zero. When you divide by zero, it results in an infinite value (inf), which is why we're seeing this in the output. To address this, the following was carried out.
+
+``` Python
 # Avoid division by zero by replacing 0 in 'NumWebVisitsMonth' with NaN or a small value
 data['WebConversionRate'] = np.where(data['NumWebVisitsMonth'] == 0, np.nan, data['NumWebPurchases'] / data['NumWebVisitsMonth'])
 
@@ -1016,13 +1035,19 @@ average_conversion_rate = data['WebConversionRate'].mean()
 
 # Print the average conversion rate as a percentage
 print("Average Web Conversion Rate: {:.2f}%".format(average_conversion_rate * 100))
-Explanation:
-np.where(): This ensures that when NumWebVisitsMonth is zero, the conversion rate is set to NaN rather than causing division by zero errors.
-Mean Calculation: The mean() function automatically ignores NaN values, so you won’t be affected by missing or invalid data when calculating the average conversion rate.
-Result:
+
+#Explanation:
+#np.where(): This ensures that when NumWebVisitsMonth is zero, the conversion rate is set to NaN rather than causing division by zero errors.
+#Mean Calculation: The mean() function automatically ignores NaN values, so you won’t be affected by missing or invalid data when calculating the average conversion rate.
+```
+
+**Result:**
+
 Average Web Conversion Rate: 109.21%
 
-Visualize Total Purchases Across Channels
+**Visualize Total Purchases Across Channels**
+
+``` Python
 # Plot the total purchases for each channel using a bar plot
 plt.figure(figsize=(10, 6))
 total_purchases.plot(kind='bar', color='lightcoral')
@@ -1031,7 +1056,110 @@ plt.xlabel('Channel')
 plt.ylabel('Total Purchases')
 plt.xticks(rotation=45, ha='right')
 plt.show()
-Explanation:
-total_purchases.plot(kind='bar', color='lightcoral'): Creates a bar plot to visualize the total purchases for each channel (Web, Catalog, Store). The color='lightcoral' adds color to the bars.
-plt.xticks(rotation=45, ha='right'): Rotates the x-axis labels to improve readability, especially when the labels are long.
-This bar plot helps to quickly compare the performance of each channel based on the total number of purchases.
+
+#Explanation:
+#total_purchases.plot(kind='bar', color='lightcoral'): Creates a bar plot to visualize the total purchases for each channel (Web, Catalog, Store). The color='lightcoral' adds color to the bars.
+#plt.xticks(rotation=45, ha='right'): Rotates the x-axis labels to improve readability, especially when the labels are long.
+#This bar plot helps to quickly compare the performance of each channel based on the total number of purchases.
+```
+
+![](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS/blob/main/Total%20purchase%20per%20channel.png)
+
+The bar chart titled "Total Purchases per Channel" illustrates the distribution of purchases across three sales channels: NumWebPurchases, NumCatalogPurchases, and NumStorePurchases. The data reveals that the highest number of purchases were made through physical stores, totaling approximately 12,000. Web purchases follow with around 8,000, while catalog purchases are the least favored, totaling approximately 6,000. The visual comparison provided by the chart highlights significant consumer preference for in-store shopping over online and catalog purchases.
+
+**Visualize Conversion Rate for the Web Channel**
+
+``` Python
+# Plot the distribution of conversion rates across all customers
+plt.figure(figsize=(10, 6))
+sns.histplot(data['WebConversionRate'], kde=True, color='skyblue', bins=20)
+plt.title('Web Conversion Rate Distribution')
+plt.xlabel('Conversion Rate')
+plt.ylabel('Frequency')
+plt.show()
+
+#Explanation:
+#sns.histplot(df['WebConversionRate'], kde=True, color='skyblue', bins=20): Plots the distribution of the conversion rates for the web channel using a histogram with a kernel density estimate (KDE) overlay.
+#bins=20: Specifies the number of bins (groups) for the histogram.
+#This visualization allows you to assess how well the web channel is performing in terms of conversions across all customers.
+```
+
+![](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS/blob/main/Web%20conversion%20rate%20distribution.png)
+
+The histogram with a superimposed density plot, titled "Web Conversion Rate Distribution," provides a detailed overview of web conversion rates. The x-axis represents the conversion rates, while the y-axis indicates the frequency of these rates. The histogram bars, shaded in light blue, show that the majority of conversion rates are clustered at the lower end of the spectrum. The superimposed density plot, represented by a smooth blue line, mirrors this trend, indicating that high conversion rates are relatively rare. This visualization highlights the challenge businesses face in achieving higher conversion rates, as most data points fall within the lower range.
+
+**Identify Underperforming Channels**
+
+``` Python
+#Find the channels with the lowest total purchases
+underperforming_channels = total_purchases[total_purchases == total_purchases.min()]
+
+print("Underperforming Channels:\n", underperforming_channels)
+
+#Explanation:
+#total_purchases.min(): Identifies the minimum value in the total purchases across channels.
+#total_purchases[total_purchases == total_purchases.min()]: Filters the channels to identify those with the lowest number of purchases.
+#This step highlights which channel(s) are underperforming compared to others.
+```
+
+**Result:**
+
+Underperforming Channels:
+- NumCatalogPurchases    5963
+
+**Visualize Performance Comparison (Horizontal Bar Plot)**
+
+```  Python
+# Plot the channel performance using a horizontal bar plot for better clarity
+plt.figure(figsize=(10, 6))
+total_purchases.plot(kind='barh', color='lightgreen')  # Horizontal bar plot
+plt.title('Channel Performance Comparison')
+plt.xlabel('Total Purchases')
+plt.ylabel('Channel')
+plt.show()
+
+#Explanation:
+#total_purchases.plot(kind='barh', color='lightgreen'): Creates a horizontal bar plot to compare the performance of each channel. Horizontal bars are often easier to interpret when there are many categories or long labels.
+#This plot gives a clear view of which channels are performing better and which are underperforming.
+```
+
+![](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS/blob/main/Channel%20performance%20comparison.png)
+
+The bar chart titled "Channel Performance Comparison" vividly illustrates the purchasing patterns across three different sales channels: NumStorePurchases, NumWebPurchases, and NumCatalogPurchases. The data reveals that in-store purchases dominate with a total exceeding 12,000, indicating a strong consumer preference for physical shopping. Web purchases come in second with a total slightly above 8,000, highlighting the importance of maintaining a robust online presence. Catalog purchases, however, trail behind with a total around 6,000, suggesting this channel is less favored by consumers.
+
+## Recommendation
+Based on the analysis in the document, the following recommendations are made to optimize Maven Marketing's strategies:
+
+**1.	Campaign Improvement:**
+- Refine Underperforming Campaigns: Campaign AcceptedCmp2 had significantly lower acceptance rates compared to others. Further investigation into its targeting, messaging, or offer types is essential. A/B testing or customer surveys can provide insights to adjust this campaign.
+- Leverage Successful Campaigns: AcceptedCmp3, AcceptedCmp4, and AcceptedCmp5 showed strong acceptance rates. These campaigns should be expanded or replicated with slight variations to reach different customer segments.
+
+**2.	Channel Optimization:**
+-	Focus on Underperforming Channels: Catalog purchases performed poorly compared to web and store purchases. Re-evaluating the catalog marketing strategy, its reach, or the product offers included might help increase engagement.
+-	Enhance Web and In-Store Purchases: Given that web and store purchases are performing better, more resources should be allocated to these channels. Promoting online sales through targeted offers and improving the store experience could boost both channels further.
+
+**3.	Customer Segmentation and Engagement:**
+- Target high-Value Segments: Customers who spend heavily on wines and gold products show a tendency to make more web purchases. Creating personalized offers for these high-spending segments could enhance revenue.
+- Increase Engagement: Customers with higher website visits tend to purchase more online. Campaigns encouraging more frequent site visits, such as exclusive previews or time-sensitive discounts, can drive higher conversion rates.
+
+**4.	Product Strategy:**
+-	Focus on High-Spending Categories: Wines and Meat Products represent the highest total spending. These categories should be prioritized in marketing campaigns, inventory management, and cross-selling efforts.
+-	Seasonal Promotions: Given the spikes in spending, especially on wines, offering seasonal promotions aligned with customer preferences (such as festive campaigns for high-spending categories) can drive more purchases.
+
+**5.	Web Conversion:**
+-	Increase Web Conversion Rate: Despite a few issues with calculating conversion rates due to zero web visits, improving website usability, and offering more incentives for first-time buyers can help enhance conversion rates. Focus on reducing friction points in the checkout process and highlighting product benefits more clearly.
+
+By following these recommendations, Maven Marketing can optimize its campaigns, better engage with high-value customers, and improve performance across different sales channels and product categories.
+
+## Conclusion
+In conclusion, the analysis of Maven Marketing's campaign and customer data revealed valuable insights into the effectiveness of marketing strategies and customer behavior. While campaigns AcceptedCmp3, AcceptedCmp4, and AcceptedCmp5 performed well, AcceptedCmp2 underperformed, indicating the need for further refinement. Web and in-store purchases dominated sales, while catalog purchases showed weaker performance. To optimize marketing efforts, Maven Marketing should focus on improving the catalog channel and expanding successful campaigns while increasing customer engagement through personalized promotions and targeted offers.
+
+The product analysis revealed that categories such as wines and meat products generate the most revenue, suggesting these should be prioritized in marketing and inventory strategies. Additionally, customers who engage more frequently with the website tend to make more purchases, highlighting the importance of enhancing web conversion rates. By refining these areas, Maven Marketing can improve customer retention, increase sales, and boost overall campaign performance, ultimately optimizing return on investment and ensuring long-term success.
+
+Thank You For Reading
+
+I’m interested in a Data Analyst role in an organization where I can showcase my skills, take more responsibilities, continue to learn, an organization that I can grow with, where my work will be highly beneficial to the organization.
+
+You can reach me on oluwaseunokundalaye5@gmail.com
+
+THANK YOU
