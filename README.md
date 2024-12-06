@@ -2,27 +2,27 @@
 A Python project for a marketing campaign data of 2,240 customers of Maven Marketing, including customer profiles, product preferences, campaign successes/failures, and channel performance.
 
 ## Table of Content
-- [Project Overview]()
+- [Project Overview](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#project-overview)
 
-- [Project Scope]()
+- [Project Scope](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#project-scope)
 
-- [Business Objective]()
+- [Business Objective](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#business-objective)
 
-- [Document Purpose]()
+- [Document Purpose](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#document-purpose)
 
-- [Use Case]()
+- [Use Case](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#use-case)
 
-- [Data Source]()
+- [Data Source](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#data-source)
 
-- [Dataset Overview]()
+- [Dataset Overview](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#dataset-overview)
 
-- [Data Cleaning and Processing]()
+- [Data Cleaning and Processing](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#data-cleaning-and-processing)
 
-- [Data Analysis and Insight]()
+- [Data Analysis and Insight](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#data-analysis-and-insight)
 
-- [Recommendation]()
+- [Recommendation](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#recommendation)
 
-- [Conclusion]()
+- [Conclusion](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#conclusion)
 
 ## Project Overview
 This project focuses on analyzing marketing campaign data from Maven Marketing to understand customer behavior, product preferences, and the effectiveness of different marketing strategies. The dataset includes detailed records of 2,240 customers, covering demographic profiles, purchase behaviors, and campaign responses. The goal is to leverage these insights to optimize marketing efforts, enhance customer retention, and increase revenue.
