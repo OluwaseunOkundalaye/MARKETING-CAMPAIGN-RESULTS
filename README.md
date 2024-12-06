@@ -2,17 +2,27 @@
 A Python project for a marketing campaign data of 2,240 customers of Maven Marketing, including customer profiles, product preferences, campaign successes/failures, and channel performance.
 
 ## Table of Content
-[- Project Overview]()
-[- Project Scope]()
-[- Business Objective]()
-[- Document Purpose]()
-[- Use Case]()
-[- Data Source]()
-[- Dataset Overview]()
-[- Data Cleaning and Processing]()
-[- Data Analysis and Insight]()
-[- Recommendation]()
-[- Conclusion]()
+- [Project Overview]()
+
+- [Project Scope]()
+
+- [Business Objective]()
+
+- [Document Purpose]()
+
+- [Use Case]()
+
+- [Data Source]()
+
+- [Dataset Overview]()
+
+- [Data Cleaning and Processing]()
+
+- [Data Analysis and Insight]()
+
+- [Recommendation]()
+
+- [Conclusion]()
 
 ## Project Overview
 This project focuses on analyzing marketing campaign data from Maven Marketing to understand customer behavior, product preferences, and the effectiveness of different marketing strategies. The dataset includes detailed records of 2,240 customers, covering demographic profiles, purchase behaviors, and campaign responses. The goal is to leverage these insights to optimize marketing efforts, enhance customer retention, and increase revenue.
@@ -100,12 +110,18 @@ There were no duplicates in the Dataset
 
 ## Data Analysis and Insight
 The following analysis were carried out in this project:
-[1.	Are there any null values or outliers? How will you handle them?](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#1are-there-any-null-values-or-outliers-how-will-you-handle-them)
-[2.	What factors are significantly related to the number of web purchases?](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#2what-factors-are-significantly-related-to-the-number-of-web-purchases)
-[3.	Which marketing campaign was the most successful?](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#3which-marketing-campaign-was-the-most-successful)
-[4.	What does the average customer look like](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#4what-does-the-average-customer-look-like)
-[5.	Which products are performing best?](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#5which-products-are-performing-best)
-[6.	Which channels are underperforming?](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#6which-channels-are-underperforming)
+
+1.	[Are there any null values or outliers? How will you handle them?](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#1are-there-any-null-values-or-outliers-how-will-you-handle-them)
+
+2.	[What factors are significantly related to the number of web purchases?](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#2what-factors-are-significantly-related-to-the-number-of-web-purchases)
+
+3.	[Which marketing campaign was the most successful?](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#3which-marketing-campaign-was-the-most-successful)
+
+4.	[What does the average customer look like](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#4what-does-the-average-customer-look-like)
+
+5.	[Which products are performing best?](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#5which-products-are-performing-best)
+
+6.	[Which channels are underperforming?](https://github.com/OluwaseunOkundalaye/MARKETING-CAMPAIGN-RESULTS#6which-channels-are-underperforming)
 
 The following libraries were imported before the above analysis were carried out:
 
